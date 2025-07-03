@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liceo Gym - Transforma tu Vida</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(0, 0, 0, 0.95) !important;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.8rem;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .navbar-nav .nav-link {
+      color: white !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 50%;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .navbar-nav .nav-link:hover::after {
+      width: 80%;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, #1abc9c 0%, red 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: black;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #1abc9c;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .cta-button {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+      color: white;
+    }
+
+    /* Particles */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Section Styling */
+    .section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      position: relative;
+      color: #333;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      border-radius: 2px;
+    }
+
+    /* Historia Section */
+    .historia {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .historia-content {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      margin: 2rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .historia-content:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Services Cards */
+    .service-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Pricing Cards */
+    .pricing-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card.featured {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ff6b6b;
+      margin: 1rem 0;
+    }
+
+    .pricing-card.featured .price {
+      color: white;
+    }
+
+    /* Gallery */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255, 107, 107, 0.8), rgba(78, 205, 196, 0.8));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay i {
+      font-size: 3rem;
+      color: white;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+      border: 2px solid #e9ecef;
+      border-radius: 10px;
+      padding: 1rem;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: white;
+      padding: 3rem 0;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-5px);
+      color: white;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .historia-content {
+        padding: 2rem;
+      }
+    }
+
+    /* Scroll animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stats Section */
+    .stats {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 80px 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="fas fa-dumbbell"></i> Liceo Gym</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#historia">Historia</a></li>
+          <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#precios">Precios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <div class="particles"></div>
+    <div class="hero-content">
+      <h1>Transforma tu Vida y Cuerpo en Liceo Gym</h1>
+      <p>Dedica un espacio para tu bienestar</p>
+    </div>
+  </section>
+
+  <!-- Historia Section -->
+  <section id="historia" class="section historia">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Nuestra Historia</h2>
+      <div class="historia-content animate-on-scroll">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h3 class="mb-4">Liceo Gym Santa Marta</h3>
+            <p style="text-align: justify;">José Armando Laínez Rivas es un joven originario de la comunidad Santa Marta, él es el creador de Liceo Gym, un negocio que ha venido a ser de gran beneficio para él y para un alto porcentaje de la población de la comunidad, incluyendo a personas adultas, jóvenes y niños, pués la idea de un gimnasio dentro de la comunidad se ha convertido en algo muy innovador.</p>
+            <p style="text-align: justify;">Es posible decir que los orígenes de esta idea comienzan en 2020, un año en donde la pandemia del Coronavirus puso un alto a todas las actividades laborales y recreativas que normalmente eran realizadas por las personas.
+Armando decide aprovechar su tiempo libre durante ese año para comenzar a realizar ejercicio en casa, luego, un joven de la comunidad habré un gimnasio y él decide ir a realizar sus rutinas de ejercicio allí, estuvo llegando durante un año y medio aproximadamente y dejó de asistir porque el gimnasio fue cerrado, ante esta situación Armando ve la posibilidad de pedir alquilado o prestado el equipo que se tenía en el gym para poder continuar desarrollando sus rutinas de ejercicio en casa. Sin embargo, Armando pone pausa por un cierto período de tiempo a su hábito de realizar actividad física por motivos de trabajo y por el poco tiempo y energía con la que contaba al estar desarrollando el mismo.</p>
+            <p style="text-align: justify;">A pesar de esto, Armando sigue manteniendo la idea de crear un espacio que le permitiera a él realizar sus rutinas de ejercicio, pero durante este proceso, él decide renunciar a su trabajo; ante la situación de desempleo que estaba pasando, la idea de crear un espacio que le fuera funcional solamente a él, se convierte en un motor de arranque para poner a volar su imaginación e identificar la manera de autoemplearse y poder monetizar el proyecto que en un primer momento fue pensado para su beneficio en términos de “salud física y emocional” pero que hoy en día se ha vuelto un espacio muy agradable y beneficioso para las personas, pues aparte de que se cuenta con un espacio en la comunidad que permite la práctica de la actividad física, Liceo Gym se ha convertido en un lugar de encuentro para las personas.  
+Con la creación de este proyecto, Armando ha facilitado el acceso a las personas de la comunidad a un espacio de este tipo, pues antes de que Liceo Gym comenzará a funcionar las personas tenían que trasladarse hasta Sensuntepeque para poder asistir a un gimnasio.
+</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="position-relative">
+              <img src="img/Gym.0.jpg" class="img-fluid rounded-3 shadow-lg" alt="Historia del gimnasio">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="historia-content animate-on-scroll">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <h3 class="mb-4">Un Espacio para Todos</h3>
+            <p style="text-align: justify;">En la actualidad las personas están priorizando su salud y con ello la práctica de actividad física, Armando reconoce que hace unos 5 años las personas que realizaban ejercicio físico o que salían a correr por las calles eran sinónimo de burla, sin embargo en la actualidad las personas han normalizado la actividad física y es muy probable que esto venga a consecuencia de muchas enfermedades que en la actualidad personas desde muy temprana edad están padeciendo. Ante todo esto Armando menciona algo muy importante.</p>
+            <p style="text-align: justify;"><em>“Es necesario que los seres humanos aprendamos a realizar cosas importantes por nosotros mismos, pues muchas veces realizamos grandes cosas por los demás pero nos olvidamos de hacerlas para nosotros”</em> - José Armando Laínez</p>
+            <p style="text-align: justify;">Muchas de las personas que asisten a Liceo Gym lo hacen por ver cambios en su apariencia física, pero otro porcentaje lo hace porque se los ha recomendado un médico y lo mejor de todo es que en ambos casos las personas se están priorizando a sí mismas y este es un gran paso hacia una buena  salud emocional, física y bienestar personal, lo cual es fundamental para llevar una vida más satisfactoria y equilibrada.</p>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="position-relative">
+              <img src="img/Gym.1.jpg" class="img-fluid rounded-3 shadow-lg" alt="Comunidad del gimnasio">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios Section -->
+  <section id="servicios" class="section">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Nuestros Horarios</h2>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-dumbbell"></i>
+            </div>
+            <h4>Entrenamiento con Pesas</h4>
+            <p>Sala completamente equipada con máquinas de última generación y pesas libres para tonificar y fortalecer tu cuerpo de manera segura y efectiva.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h4>Clases Grupales</h4>
+            <p>Zumba, HIIT, pilates y más. Clases dinámicas dirigidas por instructores calificados que te ayudarán a mantenerte motivado y alcanzar tus objetivos.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <h4>Área de Cardio</h4>
+            <p>Cintas de correr, bicicletas estáticas y máquinas elípticas para mejorar tu resistencia cardiovascular y quemar calorías de forma eficiente.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <h4>Asesoría Personalizada</h4>
+            <p>Planes de entrenamiento individualizados diseñados específicamente para tus necesidades, objetivos y nivel de condición física actual.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-apple-alt"></i>
+            </div>
+            <h4>Orientación Nutricional</h4>
+            <p>Consejos y guías nutricionales para complementar tu entrenamiento y maximizar los resultados de tu transformación física.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h4>Horarios Flexibles</h4>
+            <p>Horarios amplios y flexibles que se adaptan a tu rutina diaria, permitiéndote entrenar cuando sea más conveniente para ti.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Precios Section -->
+  <section id="precios" class="section" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Planes y Precios</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-4 col-md-6">
+          <div class="pricing-card animate-on-scroll">
+            <h4>Plan Básico</h4>
+            <div class="price">$20<small>/mes</small></div>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i>Acceso a sala de pesas</li>
+              <li><i class="fas fa-check text-success me-2"></i>Cardio ilimitado</li>
+              <li><i class="fas fa-check text-success me-2"></i>Horarios flexibles</li>
+              <li><i class="fas fa-check text-success me-2"></i>Casilleros incluidos</li>
+            </ul>
+            <button class="btn cta-button w-100 mt-3">Elegir Plan</button>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="pricing-card featured animate-on-scroll">
+            <div class="position-absolute top-0 start-50 translate-middle">
+              <span class="badge bg-warning text-dark px-3 py-2">Más Popular</span>
+            </div>
+            <h4>Plan Premium</h4>
+            <div class="price">$35<small>/mes</small></div>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check me-2"></i>Todo lo del plan básico</li>
+              <li><i class="fas fa-check me-2"></i>Clases grupales ilimitadas</li>
+              <li><i class="fas fa-check me-2"></i>Asesoría personalizada</li>
+              <li><i class="fas fa-check me-2"></i>Orientación nutricional</li>
+              <li><i class="fas fa-check me-2"></i>Acceso prioritario</li>
+            </ul>
+            <button class="btn btn-light w-100 mt-3">Elegir Plan</button>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="pricing-card animate-on-scroll">
+            <h4>Plan Familiar</h4>
+            <div class="price">$60<small>/mes</small></div>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i>Hasta 3 miembros</li>
+              <li><i class="fas fa-check text-success me-2"></i>Acceso completo</li>
+              <li><i class="fas fa-check text-success me-2"></i>Todas las clases</li>
+              <li><i class="fas fa-check text-success me-2"></i>Descuentos especiales</li>
+            </ul>
+            <button class="btn cta-button w-100 mt-3">Elegir Plan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonios - Liceo Gym</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes backgroundPulse {
+          0% { opacity: 0.3; }
+          100% { opacity: 0.8; }
+        }
+
+        @keyframes float {
+          0% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+          33% { transform: translateY(-30px) rotate(120deg); opacity: 1; }
+          66% { transform: translateY(20px) rotate(240deg); opacity: 0.8; }
+          100% { transform: translateY(0px) rotate(360deg); opacity: 0.7; }
+        }
+
+        @keyframes quoteFloat {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+
+        .testimonial-card {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        .testimonial-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+          transition: left 0.8s;
+        }
+
+        .testimonial-card:hover::before {
+          left: 100%;
+        }
+
+        .testimonial-card:hover {
+          transform: translateY(-15px) !important;
+          box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+          border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+
+        .testimonial-card:hover .author-avatar {
+          transform: scale(1.1);
+        }
+
+        .testimonial-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.95);
+            font-style: italic;
+            text-align: center;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 7;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-icon {
+            margin-bottom: 1rem;
+        }
+
+        .author-section {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            font-size: 1.2rem;
+        }
+
+        .author-name {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .author-info {
+            font-size: 0.8rem;
+        }
+
+        .animate-on-scroll {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .animate-on-scroll.animate-in {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+        }
+
+        @media (max-width: 768px) {
+          .section-title {
+            font-size: 2.5rem !important;
+          }
+          
+          .testimonial-card {
+            padding: 2rem 1.5rem !important;
+            margin-bottom: 2rem;
+          }
+
+          .testimonial-text {
+            font-size: 0.9rem;
+            -webkit-line-clamp: 6;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .testimonial-text {
+            font-size: 0.85rem;
+            -webkit-line-clamp: 5;
+          }
+        }
+    </style>
+</head>
+<body>
+    <!-- Testimonios Section Mejorada -->
+    <section class="testimonials-section py-5" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%); position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center;">
+      
+      <!-- Fondo animado -->
+      <div style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(78, 205, 196, 0.1) 0%, transparent 50%); animation: backgroundPulse 8s ease-in-out infinite alternate;"></div>
+
+      <!-- Formas flotantes decorativas -->
+      <div class="floating-shapes" style="position: absolute; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+        <div class="shape" style="position: absolute; width: 80px; height: 80px; top: 20%; left: 10%; background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1)); border-radius: 50%; animation: float 20s infinite linear;"></div>
+        <div class="shape" style="position: absolute; width: 120px; height: 120px; top: 60%; right: 15%; background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1)); border-radius: 50%; animation: float 20s infinite linear; animation-delay: -5s;"></div>
+        <div class="shape" style="position: absolute; width: 60px; height: 60px; top: 80%; left: 70%; background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1)); border-radius: 50%; animation: float 20s infinite linear; animation-delay: -10s;"></div>
+      </div>
+
+      <div class="container position-relative" style="z-index: 2;">
+        <div class="text-center mb-5">
+          <h2 class="section-title animate-on-scroll" style="font-size: 3.5rem; font-weight: 700; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; position: relative;">
+            Lo que dicen nuestros miembros
+          </h2>
+          <p class="section-subtitle animate-on-scroll" style="font-size: 1.3rem; color: rgba(255, 255, 255, 0.8); font-weight: 300; margin-bottom: 4rem;">
+            Historias reales de transformación y éxito
+          </p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Testimonio 1 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card animate-on-scroll" data-delay="100">
+              
+              <div class="testimonial-content">
+                <div class="quote-icon" style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, Navy, #ee5a24); display: flex; align-items: center; justify-content: center; margin: 0 auto; animation: quoteFloat 3s ease-in-out infinite;">
+                  <i class="fas fa-quote-left" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                
+                <p class="testimonial-text">
+                  ""Ir a Liceo Gym es una experiencia muy gratificante que me ha enseñado a ser más disciplinada y responsable. Me ha ayudado a mejorar mi salud física y mental, aumentar mi energía y confianza, también a reducir el estrés. Es un espacio donde puedo sentirme orgullosa de mí misma."
+                </p>
+              </div>
+              
+              <div class="author-section" style="display: flex; align-items: center;">
+                <div class="author-avatar" style="border-radius: 50%; background: linear-gradient(45deg, Navy, #ee5a24); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; margin-right: 1rem; transition: transform 0.3s ease;">
+                  M
+                </div>
+                <div>
+                  <h6 class="author-name" style="color: white; font-weight: 600;">Mariam Yulisa Rivas</h6>
+                  <div class="author-info" style="color: rgba(255, 255, 255, 0.7); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Miembro desde 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 2 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card animate-on-scroll" data-delay="200">
+              
+              <div class="testimonial-content">
+                <div class="quote-icon" style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, violet, maroon); display: flex; align-items: center; justify-content: center; margin: 0 auto; animation: quoteFloat 3s ease-in-out infinite;">
+                  <i class="fas fa-quote-left" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                
+                <p class="testimonial-text">
+                  "Realizar actividad física y formar parte de Liceo Gym me ha servido mucho para mejorar mi salud física y mental, reducir el riesgo de enfermedades crónicas, controlar mi peso y mejorar mi estado de ánimo. El ejercicio regular me ayuda a fortalecer el corazón, los huesos y los músculos."
+                </p>
+              </div>
+              
+              <div class="author-section" style="display: flex; align-items: center;">
+                <div class="author-avatar" style="border-radius: 50%; background: linear-gradient(45deg, violet, maroon); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; margin-right: 1rem; transition: transform 0.3s ease;">
+                  J
+                </div>
+                <div>
+                  <h6 class="author-name" style="color: white; font-weight: 600;">Jessica Cortéz</h6>
+                  <div class="author-info" style="color: rgba(255, 255, 255, 0.7); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Miembro desde 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+                    <!-- Testimonio 3-->
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card animate-on-scroll" data-delay="200">
+              
+              <div class="testimonial-content">
+                <div class="quote-icon" style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, green, red); display: flex; align-items: center; justify-content: center; margin: 0 auto; animation: quoteFloat 3s ease-in-out infinite;">
+                  <i class="fas fa-quote-left" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                
+                <p class="testimonial-text">
+                  "Asistir al gimnasio se ha convertido en una práctica fundamental para quienes buscamos mejorar nuestra calidad de vida. Más allá de los objetivos físicos o estéticos, ir al gimnasio representa un compromiso con la salud, el bienestar mental y el desarrollo personal."
+                </p>
+              </div>
+              
+              <div class="author-section" style="display: flex; align-items: center;">
+                <div class="author-avatar" style="border-radius: 50%; background: linear-gradient(45deg, green, red); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; margin-right: 1rem; transition: transform 0.3s ease;">
+                  I
+                </div>
+                <div>
+                  <h6 class="author-name" style="color: white; font-weight: 600;">Idalma Hernández</h6>
+                  <div class="author-info" style="color: rgba(255, 255, 255, 0.7); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Miembro desde 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+                    <!-- Testimonio 4 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card animate-on-scroll" data-delay="200">
+              
+              <div class="testimonial-content">
+                <div class="quote-icon" style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, blue, yellow); display: flex; align-items: center; justify-content: center; margin: 0 auto; animation: quoteFloat 3s ease-in-out infinite;">
+                  <i class="fas fa-quote-left" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                
+                <p class="testimonial-text">
+                  ""
+                </p>
+              </div>
+              
+              <div class="author-section" style="display: flex; align-items: center;">
+                <div class="author-avatar" style="border-radius: 50%; background: linear-gradient(45deg, blue, yellow); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; margin-right: 1rem; transition: transform 0.3s ease;">
+                  G
+                </div>
+                <div>
+                  <h6 class="author-name" style="color: white; font-weight: 600;">Geovany Rivera</h6>
+                  <div class="author-info" style="color: rgba(255, 255, 255, 0.7); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Miembro desde 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+                    <!-- Testimonio 5-->
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card animate-on-scroll" data-delay="200">
+              
+              <div class="testimonial-content">
+                <div class="quote-icon" style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg,  purple, pink); display: flex; align-items: center; justify-content: center; margin: 0 auto; animation: quoteFloat 3s ease-in-out infinite;">
+                  <i class="fas fa-quote-left" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                
+                <p class="testimonial-text">
+                  ""
+                </p>
+              </div>
+              
+              <div class="author-section" style="display: flex; align-items: center;">
+                <div class="author-avatar" style="border-radius: 50%; background: linear-gradient(45deg,  purple, pink); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; margin-right: 1rem; transition: transform 0.3s ease;">
+                  A
+                </div>
+                <div>
+                  <h6 class="author-name" style="color: white; font-weight: 600;">Ana Hernández</h6>
+                  <div class="author-info" style="color: rgba(255, 255, 255, 0.7); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Miembro desde 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 6-->
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card animate-on-scroll" data-delay="300">
+              
+              <div class="testimonial-content">
+                <div class="quote-icon" style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, yellow, orange); display: flex; align-items: center; justify-content: center; margin: 0 auto; animation: quoteFloat 3s ease-in-out infinite;">
+                  <i class="fas fa-quote-left" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                
+                <p class="testimonial-text">
+                  "Voy al gimnasio no solo para verme bien, sino para mejorar mi salud física y bienestar emocional. Ir al gym me permite aumentar mi fuerza y energía, ya que con cada entrenamiento, mi cuerpo se vuelve más fuerte. El gimnasio me enseña a ser constante y a no rendirme fácilmente."
+                </p>
+              </div>
+              
+              <div class="author-section" style="display: flex; align-items: center;">
+                <div class="author-avatar" style="border-radius: 50%; background: linear-gradient(45deg, yellow, orange); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; margin-right: 1rem; transition: transform 0.3s ease;">
+                  A
+                </div>
+                <div>
+                  <h6 class="author-name" style="color: white; font-weight: 600;">Aristides Morales</h6>
+                  <div class="author-info" style="color: rgba(255, 255, 255, 0.7); display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Miembro desde 2025</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JavaScript para las animaciones -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Intersection Observer para animaciones
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+              entry.target.classList.add('animate-in');
+            }, delay);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Observar todos los elementos con animación
+      document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Efecto de parallax suave en scroll
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const shapes = document.querySelectorAll('.shape');
+        
+        shapes.forEach((shape, index) => {
+          const speed = (index + 1) * 0.5;
+          shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+        });
+      });
+    });
+    </script>
+</body>
+</html>
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="container text-center">
+      <p class="mb-0">© 2025 Liceo Gym.</p>
+      <div class="social-links mt-3">
+        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts de Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Animación on-scroll -->
+  <script>
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+
+    elements.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

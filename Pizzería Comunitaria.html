@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa Marta Pizza - Sabores Auténticos de la Comunidad</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(139, 69, 19, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff6b35;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #8b4513 0%, #ff6b35 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="3" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #ff6b35;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
+            background: #e55a2b;
+        }
+
+        /* Sections General */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #8b4513;
+            position: relative;
+            animation: slideInFromLeft 1s ease-out;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #8b4513, #ff6b35);
+            border-radius: 2px;
+        }
+
+        /* Historia Section */
+        .historia {
+            background: linear-gradient(135deg, #f8f4e6 0%, #fff 100%);
+        }
+
+        .historia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .historia-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .historia-image {
+            text-align: center;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .pizza-icon {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #ff6b35, #8b4513);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            margin: 0 auto;
+            animation: rotate 10s linear infinite;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Menú Section */
+        .menu {
+            background: #fff;
+        }
+
+        .menu-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .menu-category {
+            background: linear-gradient(135deg, #fff 0%, #f8f4e6 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .menu-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: #8b4513;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 107, 53, 0.05);
+            padding-left: 1rem;
+            border-radius: 8px;
+        }
+
+        .item-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        /* Contacto Section */
+        .contacto {
+            background: linear-gradient(135deg, #8b4513 0%, #ff6b35 100%);
+            color: white;
+        }
+
+        .contacto-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contacto-info {
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .contacto-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contacto-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(10px);
+        }
+
+        .contacto-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .mapa {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeInRight 1s ease-out;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            }
+            to {
+                text-shadow: 3px 3px 20px rgba(255,107,53,0.5);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .historia-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contacto-content {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .pizza-icon {
+                width: 200px;
+                height: 200px;
+                font-size: 5rem;
+            }
+        }
+
+        /* Scroll Animation Trigger */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">🍕 Santa Marta Pizza</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#historia">Nuestra Historia</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Santa Marta Pizza</h1>
+            <p>Sabores auténticos que unen a la comunidad</p>
+            <a href="#menu" class="cta-button">Descubre Nuestro Menú</a>
+        </div>
+    </section>
+
+    <!-- Historia Section -->
+    <section id="historia" class="historia section">
+        <h2 class="section-title animate-on-scroll">Nuestra Historia</h2>
+        <div class="historia-content">
+            <div class="historia-text animate-on-scroll">
+                <p>Santa Marta Pizza nació del sueño de una familia apasionada por compartir los auténticos sabores de la cocina italiana con nuestra querida comunidad.</p>
+                
+                <p>Desde nuestros humildes comienzos en el corazón del barrio Santa Marta, hemos trabajado incansablemente para crear no solo las mejores pizzas, sino también un espacio donde las familias se reúnen, los amigos celebran y la comunidad se fortalece.</p>
+                
+                <p>Cada pizza que preparamos lleva el cariño de generaciones de tradiciones culinarias, combinadas con ingredientes frescos y locales. Creemos que la buena comida tiene el poder de unir a las personas y crear momentos inolvidables.</p>
+                
+                <p>Hoy, Santa Marta Pizza es más que una pizzería; somos parte integral de nuestra comunidad, comprometidos con ofrecer calidad, calidez y sabor en cada bocado.</p>
+            </div>
+            <div class="historia-image animate-on-scroll">
+                <div class="pizza-icon">🍕</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menú Section -->
+    <section id="menu" class="menu section">
+        <h2 class="section-title animate-on-scroll">Nuestro Menú</h2>
+        <div class="menu-categories">
+            <!-- Pizzas Personales -->
+            <div class="menu-category animate-on-scroll">
+                <h3 class="category-title">🍕 Pizzas Personales 🍕 </h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Cheese Pizza</div>
+                    </div>
+                    <div class="item-price">$3</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Jamon Pizza</div>
+                    </div>
+                    <div class="item-price">$3</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pepperoni Pizza</div>
+                    </div>
+                    <div class="item-price">$3.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza Suprema</div>
+                    </div>
+                    <div class="item-price">$3.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Carne Pizza</div>
+                    </div>
+                    <div class="item-price">$3.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza Vegetariana</div>
+                    </div>
+                    <div class="item-price">$3.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pollo Pizza</div>
+                    </div>
+                    <div class="item-price">$3.50</div>
+                </div>
+            </div>
+
+            <!-- Pizzas Familiares -->
+            <div class="menu-category animate-on-scroll">
+                <h3 class="category-title">👨‍👩‍👧‍👦🍕 Pizzas Familiares 👨‍👩‍👧‍👦🍕</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Cheese Pizza</div>
+                    </div>
+                    <div class="item-price">$6.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Jamon Pizza</div>
+                    </div>
+                    <div class="item-price">$7.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pepperoni Pizza</div>
+                    </div>
+                    <div class="item-price">$8.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Hawaillana Pizza</div>
+                    </div>
+                    <div class="item-price">$9.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Carne Pizza</div>
+                    </div>
+                    <div class="item-price">$9.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pollo Pizza</div>
+                    </div>
+                    <div class="item-price">$9.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Vegetariana Pizza</div>
+                    </div>
+                    <div class="item-price">$10.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Suprema Pizza</div>
+                    </div>
+                    <div class="item-price">$10.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pollo y Carne Pizza</div>
+                    </div>
+                    <div class="item-price">$12.00</div>
+                </div>
+            </div>
+<!-- Otros -->
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6 col-lg-4">
+        <div class="menu-category animate-on-scroll text-center">
+            <h3 class="category-title"> 🍔 Otros 🍔 </h3>
+            <div class="menu-item">
+                <div>
+           
+                        <div class="item-name">Ensalada César</div>
+                        <div class="item-description">Lechuga romana, crutones, parmesano, aderezo césar</div>
+                    </div>
+                    <div class="item-price">$7.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Alitas BBQ</div>
+                        <div class="item-description">8 alitas con salsa barbacoa casera</div>
+                    </div>
+                    <div class="item-price">$9.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Lasaña Tradicional</div>
+                        <div class="item-description">Pasta, carne, salsa boloñesa, quesos</div>
+                    </div>
+                    <div class="item-price">$12.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Bebidas</div>
+                        <div class="item-description">Refrescos, jugos naturales, agua</div>
+                    </div>
+                    <div class="item-price">$2.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Postre del Día</div>
+                        <div class="item-description">Tiramisú, cheesecake o helado artesanal</div>
+                    </div>
+                    <div class="item-price">$4.50</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="contacto section">
+        <h2 class="section-title animate-on-scroll">Contáctanos</h2>
+        <div class="contacto-content">
+            <div class="contacto-info">
+                <div class="contacto-item animate-on-scroll">
+                    <div class="contacto-icon">📍</div>
+                    <div>
+                        <h3>Dirección</h3>
+                        <p>Calle Principal #123, Barrio Santa Marta<br>San Salvador, El Salvador</p>
+                    </div>
+                </div>
+                <div class="contacto-item animate-on-scroll">
+                    <div class="contacto-icon">📞</div>
+                    <div>
+                        <h3>Teléfono</h3>
+                        <p>(503) 2234-5678<br>WhatsApp: (503) 7890-1234</p>
+                    </div>
+                </div>
+                <div class="contacto-item animate-on-scroll">
+                    <div class="contacto-icon">🕒</div>
+                    <div>
+                        <h3>Horarios</h3>
+                        <p>Lunes a Domingo<br>11:00 AM - 10:00 PM</p>
+                    </div>
+                </div>
+                <div class="contacto-item animate-on-scroll">
+                    <div class="contacto-icon">📧</div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>pedidos@santamartapizza.com<br>info@santamartapizza.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mapa animate-on-scroll">
+                <h3>📍 Nuestra Ubicación</h3>
+                <p>Nos encontramos en el corazón del barrio Santa Marta, un lugar accesible y acogedor donde la comunidad se reúne para disfrutar de los mejores sabores.</p>
+                <br>
+                <p><strong>¿Cómo llegar?</strong></p>
+                <p>Estamos ubicados a 2 cuadras del parque central, sobre la calle principal. Fácil acceso en transporte público y con estacionamiento disponible.</p>
+                <div style="margin-top: 2rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                    <p>🚗 Servicio a domicilio disponible</p>
+                    <p>🛵 Entrega gratuita en un radio de 3km</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Santa Marta Pizza - Emprendimiento Comunitario</p>
+        <p>Hecho con ❤️ para nuestra comunidad</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(139, 69, 19, 0.98)';
+            } else {
+                header.style.background = 'rgba(139, 69, 19, 0.95)';
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            
+            if (hero) {
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Add floating animation to pizza icon
+        const pizzaIcon = document.querySelector('.pizza-icon');
+        if (pizzaIcon) {
+            setInterval(() => {
+                pizzaIcon.style.transform += ' translateY(-5px)';
+                setTimeout(() => {
+                    pizzaIcon.style.transform = pizzaIcon.style.transform.replace(' translateY(-5px)', '');
+                }, 1000);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

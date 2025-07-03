@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salomé Restaurante & Café</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header y Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #d4af37;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d4af37;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23654321" width="1200" height="800"/><circle fill="%23d4af37" opacity="0.1" cx="200" cy="200" r="150"/><circle fill="%23d4af37" opacity="0.1" cx="800" cy="400" r="200"/><circle fill="%23d4af37" opacity="0.1" cx="1000" cy="150" r="100"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #d4af37, #f4d03f);
+            color: #333;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #d4af37;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #d4af37;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f8f8;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #d4af37, #f4d03f);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-category h3 {
+            color: #d4af37;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .item-name {
+            font-weight: bold;
+        }
+
+        .item-price {
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        /* Services Section */
+        .services {
+            background: #f8f8f8;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #d4af37, #f4d03f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+
+        .contact-info {
+            background: #333;
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #d4af37;
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Salomé</a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Salomé Restaurante & Café</h1>
+            <p>Descubre una experiencia gastronómica única donde cada plato cuenta una historia y cada taza de café despierta tus sentidos</p>
+            <a href="#menu" class="cta-button">Ver Nuestro Menú</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="about">
+        <div class="section-title animate-on-scroll">Nuestra Historia</div>
+        <div class="about-content">
+            <div class="about-text animate-on-scroll">
+                <p style="text-align: justify;"> La idea de crear Salomé Restaurante & Café surge cuando Nancy estaba apunto de salir de la universidad, ella al ver la problemática de desempleo que vivía su familia decide buscar una solución ante esta situación que estaban enfrentando, Salomé Restaurante & Café es un negocio creado en familia y con el fin de servir a las familias de la comunidad Santa Marta y de todas las comunidades, municipios, departamentos y países que deseen visitar sus instalaciones. </p>
+                <p style="text-align: justify;"> Nancy Carolina Ayala Ascencio es una joven soñadora, luchadora y capaz de hacer  realidad sus sueños. Desde muy pequeña tuvo la idea de tener su propio negocio, de hecho la carrera universitaria que eligió estudiar la eligió pensando en esta posibilidad, al igual que siempre mostró un amor por la cocina y todo lo que de esta se deriva, Nancy desde muy joven se caracteriza por ser la encargada de la cocina durante las reuniones o festejos familiares. </p>
+                <p style="text-align: justify;"> Como parte de la historia de este emprendimiento, es muy importante mencionar que el nombre “Salomé” fue pensado como una idea de aprovechar el nombre del abuelo de la familia y a su vez de rendirle un homenaje a una persona que ha sido un pilar fundamental dentro de la misma, “Salomé” aparte de ser un nombre poco común en la comunidad es un nombre muy bonito y llamativo, elegirlo ha sido una gran idea, pues no solamente han elegido un nombre único, sino que con esta elección también han elegido hacer un agradecimiento y homenaje por todo el trabajo que ha realizado don Salomé dentro de la familia.</p>
+                <p style="text-align: justify;"> Aunque este negocio ha sido posible gracias a todo el apoyo familiar, Nancy a tenido un papel muy importante en esta idea y se puede decir que ella es la diseñadora de la misma, pero el apoyo que ha brindado todo la familia también ha sido de gran importancia para convertir en realidad algo que en un momento solo era una idea.</p>
+                <p style="text-align: justify;"> Nancy es Licenciada en Administración de Empresas, carrera que le ha permitido profundizar aún más en su conocimientos, también ha adquirido mayores conocimientos en la parte de la cocina, pues es ella la encargada de la preparación de los diferentes tipos de platillos que en Salomé Restaurante & Café se ofrecen.</p>
+                <p style="text-align: justify;"> Salomé Restaurante & Café es un lugar en donde las personas pueden disfrutar de un espacio agradable que les permita recrearse, dedicarse un tiempo para sí mismos y compartir momentos únicos en familia mientras disfrutan de un rico platillo y bebida preparada por el amable personal que labora en el local.</p>
+                <p style="text-align: justify;"> El equipo que trabaja en el Restaurante está conformado por Elsi y Albertina encargadas de servir, hacer bebidas y dedicarse a la cocina cuando es necesario, Nancy es la encargada del funcionamiento del local, todo lo que tiene que ver con surtir el mismo y llevar la parte administrativa y redes sociales, también realiza actividades en la cocina y Adonis quien es el encargado de realizar los servicios de entrega a domicilio.</p>
+            </div>
+            <div class="about-image animate-on-scroll">
+                😋🍽️😋
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <div class="section-title animate-on-scroll">Nuestro Menú</div>
+        <div class="menu-grid">
+            <div class="menu-category animate-on-scroll">
+                <h3 text-align: center;>🌮 Entradas 🌮</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Nachos con Carne</div>
+                        <small>Tortilas de maíz, acompañadas de frijolitos refritos, carne picada, salsa de aguacate, chirmol y queso gratinado.</small>
+                    </div>
+                    <span class="item-price">$4.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Nachos con Queso</div>
+                        <small>Tortillas de maíz, bañadas en salsa de queso, acompañadas de frijolitos refritos, salsa de aguacate y chirmol.</small>
+                    </div>
+                    <span class="item-price">$4.00</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Tortilita Jalapeña</div>
+                        <small>Tortillita de maíz frita, acompañada de queso gratinado y jalapeños.</small>
+                    </div>
+                    <span class="item-price">$2.00</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Papas Francesas</div>
+                        <small>Orden de papas acompañdas de kétchup.</small>
+                    </div>
+                    <span class="item-price">$1.75</span>
+                </div>
+              <div class="menu-item">
+                    <div>
+                        <div class="item-name">Salchi-Papa</div>
+                        <small>Papas francesas acompañadas de salchichas y baño de queso cheddar.</small>
+                    </div>
+                    <span class="item-price">$2.50</span>
+                </div>
+            </div>
+
+
+            <div class="menu-category animate-on-scroll">
+                <h3> 🍕Pizzas 🍕</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza de Jamón</div>
+                        <small>Salsa de tomate, queso y jamón.</small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza de Pepperoni</div>
+                        <small>Salsa de tomate, queso y pepperoni.</small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza de Hongos</div>
+                        <small>Salsa de tomate, queso y hongos.</small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza Hawaiana</div>
+                        <small>Salsa de tomate, queso, jamón y piña.</small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+                </div>
+            </div>  
+            
+            <div class="menu-category animate-on-scroll">
+                <h3>🍽️ Platos fuertes 🍽️ </h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Carne a la Parrilla</div>
+                        <small> 6 oz de carne de res, papa rellena de queso, vegetales, arroz, chirmol y tortilla.</small>
+                    </div>
+                    <span class="item-price">$6.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Churrasco Argentino</div>
+                        <small>6 oz de carne de res, chorizo argentino, casamiento, vegetales, chirmol, aguacate, queso y tortilla.</small>
+                    </div>
+                    <span class="item-price">$7.25</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pechuga a la Plancha</div>
+                        <small>6 oz de pechuga de pollo, papa rellena de queso, ensalada fresca, arroz y tortilla.</small>
+                    </div>
+                    <span class="item-price">$6.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Costilla de Cerdo en Salsa BBQ</div>
+                        <small>8 oz de costilla, acompañada de casamiento, vegetales, papa horneada y tortilla frita.</small>
+                    </div>
+                    <span class="item-price">$7.99</span>
+                </div>
+            </div>
+
+            <div class="menu-category animate-on-scroll">
+                <h3>🍔 Comida Rápida 🌮 </h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pechuguitas Empanizadas</div>
+                        <small> 5 oz de pechuga de pollo cortada en trocitos, acompañada de papas.</small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Hamburguesa de Res</div>
+                        <small> Pan, carne, hongos, lechuga, tomate, pepino, cebolla, queso cheddar y hongos, acompañada de papas.</small>
+                    </div>
+                    <span class="item-price">$4.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Burrito</div>
+                        <small>Tortilla de harina, carne de res o pollo, frijoles molidos, queso cheddar, aguacate, chirmol, acompañado de papas.</small>
+                    </div>
+                    <span class="item-price">$4.25</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Tacos al Carbón</div>
+                        <small>3 tacos de carne de res, pollo o mixtos en tortilla de maíz, acompañados de chirmol.</small>
+                    </div>
+                    <span class="item-price">$4.00</span>
+               </div> 
+            </div> 
+            
+            <div class="menu-category animate-on-scroll">
+                <h3>🍹 Bebidas 🍸</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Refresco Natural</div>
+                        <small></small>
+                    </div>
+                    <span class="item-price">$1.50</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Frozen de Frutas</div>
+                        <small></small>
+                    </div>
+                    <span class="item-price">$2.00</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Limonada con HierbaBuena</div>
+                        <small></small>
+                    </div>
+                    <span class="item-price">$2.00</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Limonada Rosa</div>
+                        <small></small>
+                    </div>
+                    <span class="item-price">$2.00</span>
+            </div>                  
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Limonada Natural</div>
+                    <small></small>
+                    </div>
+                    <span class="item-price">$1.50</span>
+            </div>               
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Mojito Cubano</div>
+                    <small></small>
+                    </div>
+                    <span class="item-price">$3.25</span>
+            </div>
+             <div class="menu-item">
+                <div>
+                    <div class="item-name">Mojito con Fresa</div>
+                    <small></small>
+                    </div>
+                    <span class="item-price">$3.25</span>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Michelada</div>
+                    <small></small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Licuados</div>
+                    <small></small>
+                    </div>
+                    <span class="item-price">$1.50</span>
+            </div>
+        </div>
+                        
+            <div class="menu-category animate-on-scroll">
+                <h3> 👌 Especiales 🍽️ </h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Tacos de Camarón</div>
+                        <small> Tres tacos de tortilla de maíz, chirmol, col morada, camarones empanizados con baño d salsa chipotle y aguacate.</small>
+                    </div>
+                    <span class="item-price">$5.00</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Ensalada de la Casa</div>
+                        <small>Lechuga, tomate, pepino zanahoria rallada, aceitunas, crutones, pechuga a la plancha y salsa ranch.</small>
+                    </div>
+                    <span class="item-price">$4.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Mar y Tierra</div>
+                        <small>4 camarones, 6 onz de pechuga, 6 onz de carnea la parrilla acompañado de arroz, vegetales, tortilla frita y papa horneada.</small>
+                    </div>
+                    <span class="item-price">$13.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pasta en Salsa Alfredo</div>
+                        <small>Pasta tipo linguine, salsa blanca de hongos con proteína a su elección (pechuga a la plancha o camarones)</small>
+                    </div>
+                    <span class="item-price">$4.99</span>
+            </div>                  
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services">
+        <div class="section-title animate-on-scroll">Nuestros Servicios</div>
+        <div class="services-grid">
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🍽️</div>
+                <h3>Banquetes</h3>
+                <p>Disfruta de nuestros deliciosos platos en la comodidad de tu hogar. Servicio rápido y empaque ecológico.</p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🚚</div>
+                <h3>Entregas a domicilio</h3>
+                <p>Entregamos a domicilio en toda la ciudad. Pedidos en línea y pago con tarjeta disponible.</p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🎉</div>
+                <h3>Baby shower</h3>
+                <p>Organizamos tus celebraciones especiales. Menús personalizados y atención exclusiva.</p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">👥</div>
+                <h3>Bodas</h3>
+                <p>Servicio de catering para empresas y eventos. Calidad gourmet para tus reuniones importantes.</p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">👥</div>
+                <h3>Bautizos</h3>
+                <p>Servicio de catering para empresas y eventos. Calidad gourmet para tus reuniones importantes.</p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">👥</div>
+                <h3>XV años</h3>
+                <p>Servicio de catering para empresas y eventos. Calidad gourmet para tus reuniones importantes.</p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">👥</div>
+                <h3>Cumpleaños</h3>
+                <p>Servicio de catering para empresas y eventos. Calidad gourmet para tus reuniones importantes.</p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">👥</div>
+                <h3>Graduaciones</h3>
+                <p>Servicio de catering para empresas y eventos. Calidad gourmet para tus reuniones importantes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto">
+        <div class="section-title animate-on-scroll">Contáctanos</div>
+        <div class="contact-content">
+            <div class="contact-form animate-on-scroll">
+                <h3>Envíanos un Mensaje</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Enviar Mensaje</button>
+                </form>
+            </div>
+            <div class="contact-info animate-on-scroll">
+                <h3>Información de Contacto</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Dirección</h4>
+                        <p>Comunidad Valle Nuevo, Cantón Santa Marta, Ciudad Victoria, Cabañas, El Salvador</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h4>Teléfono</h4>
+                        <p>+503 7654-0450</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <h4>Instagram</h4>
+                        <p>@restaurante_salome</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div>
+                        <h4>Horarios</h4>
+                        <p>Lun - Dom: 6:00 AM - 10:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Salomé Restaurante & Café</h3>
+            <div class="social-links">
+                <a href="#">📘</a>
+                <a href="#">📷</a>
+                <a href="#">🐦</a>
+                <a href="#">📧</a>
+            </div>
+            <p>&copy; 2025 Salomé Restaurante & Café.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animated');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run on page load
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(20, 20, 20, 0.98)';
+            } else {
+                header.style.background = 'rgba(20, 20, 20, 0.95)';
+            }
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+            this.reset();
+        });
+
+        // Menu item hover effects
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(5px)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Add floating animation to service icons
+        document.querySelectorAll('.service-icon').forEach((icon, index) => {
+            icon.style.animation = `float 3s ease-in-out infinite`;
+            icon.style.animationDelay = `${index * 0.5}s`;
+        });
+
+        // Add CSS animation for floating effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprendimientos Locales - Apoyemos lo Nuestro</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        /* Animaciones personalizadas */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale3d(0.3, 0.3, 0.3);
+            }
+            20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            40% {
+                transform: scale3d(0.9, 0.9, 0.9);
+            }
+            60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+            80% {
+                transform: scale3d(0.97, 0.97, 0.97);
+            }
+            100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        /* Navbar con efecto glassmorphism */
+        .navbar {
+            backdrop-filter: blur(10px);
+            background: rgba(33, 37, 41, 0.95) !important;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            animation: pulse 2s infinite;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(45deg, #007bff, #00d4ff);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Hero section con efectos parallax */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/Imagen Representativa .jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,123,255,0.1), rgba(40,167,69,0.1));
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .hero-section h1 {
+            animation: fadeInUp 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-section p {
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-section .btn {
+            animation: bounceIn 1s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+            transform: perspective(1px) translateZ(0);
+        }
+
+        .hero-section .btn::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #007bff, #28a745);
+            transform: scaleX(0);
+            transform-origin: 0 50%;
+            transition: transform 0.3s ease-out;
+        }
+
+        .hero-section .btn:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Cards con efectos hover mejorados */
+        .card-emprendimiento {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-emprendimiento::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,123,255,0.1), rgba(40,167,69,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .card-emprendimiento:hover::before {
+            opacity: 1;
+        }
+
+        .card-emprendimiento:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .card-emprendimiento:hover .card-img-top {
+            transform: scale(1.1);
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Blog cards con efectos modernos */
+        .blog-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .card-img {
+            height: 100%;
+            background-size: contain;
+            background-position: center;
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            transform: translateY(20px);
+            opacity: 0.9;
+            transition: all 0.4s ease;
+        }
+
+        .blog-card:hover .card-img {
+            transform: scale(1.1);
+        }
+
+        .blog-card:hover .card-overlay {
+            transform: translateY(0);
+            opacity: 1;
+            background: linear-gradient(135deg, rgba(0,123,255,0.8), rgba(40,167,69,0.8));
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Iconos con animaciones */
+        .fa-3x {
+            transition: all 0.3s ease;
+        }
+
+        .fa-3x:hover {
+            transform: scale(1.2) rotate(5deg);
+            color: #007bff !important;
+        }
+
+        /* Sección de historia con animaciones parallax */
+        #santa-marta {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .history-img {
+            transition: all 0.6s ease;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .history-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        /* Footer con gradiente animado */
+        footer {
+            background: linear-gradient(45deg, #343a40, #495057);
+            color: white;
+            padding: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #007bff, transparent);
+            animation: slide 3s infinite;
+        }
+
+        @keyframes slide {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Botón de scroll suave */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #007bff, #28a745);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-indicator.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .scroll-indicator:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Animaciones de entrada */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Texto animado */
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid #007bff;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #007bff; }
+        }
+
+        /* Partículas de fondo */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: particleFloat 6s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) scale(0); }
+            100% { transform: translateY(-100px) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Indicador de scroll -->
+    <div class="scroll-indicator" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-store-alt"></i> EmprendeLocal
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Santa-Marta">Santa Marta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Emprendimientos">Emprendimientos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Exploremos">Exploremos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Otros-Emprendimientos">Otros-Emprendiminetos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Hero con efectos parallax -->
+    <section class="hero-section text-center text-white d-flex align-items-center justify-content-center" style="height: 100vh;">
+        <div class="particles"></div>
+        <div class="container">
+            <h1 class="display-3 fw-bold mb-4">Apoyemos los emprendimientos Santamarteños</h1>
+            <a href="#Emprendimientos" class="btn btn-lg btn-light shadow px-5 py-3">👇🏻🌱Conozcamos Emprendimientos-Comunitarios 🌱👇🏻</a>
+        </div>
+    </section>
+
+    <!-- Sección Santa Marta -->
+    <section id="Santa-Marta" class="py-5" style="background-color: burlywood;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 animate-on-scroll">
+                    <h2 data-aos="fade-right">Pequeña Historia de Santa Marta</h2>
+                    <p class="lead typing-effect" data-aos="fade-right" data-aos-delay="200">La cuna de emprendedores y emprendedoras</p>
+                    <p style="text-align: justify;" data-aos="fade-up" data-aos-delay="400">
+                        Santa Marta es una comunidad que pertenece al municipio de Cabañas Este, departamento de Cabañas, El Salvador. 
+                        Santa Marta se ubica en la zona Norte del departamento, es una de las comunidades del departamento de Cabañas que se encuentra muy cercana a la frontera con nuestro país hermano Honduras.
+                    </p>
+                    <p style="text-align: justify;" data-aos="fade-up" data-aos-delay="600">
+                        Durante los años 80 los habitantes de la comunidad se ven obligados a salir del país para exiliarse en los campamentos de Mesa Grande Honduras, esto a causa del conflicto armado que vivió nuestro país desde 1981 hasta 1992. Este período fuera del país fue un momento propicio para fomentar la organización en los habitantes de la comunidad. Organizados y con un espíritu de lucha es como se logra regresar al país y repoblar la comunidad en 4 retornos, el primero el 10 de octubre de 1987, el segundo el 5 de noviembre de 1988, el tercero el 29 de octubre de 1989 y el cuarto el 21 de marzo de 1992. Los habitantes de la comunidad logran regresar a ella, luego de haber pasado un largo período de tiempo refugiados en los campamentos de Mesa Grande Honduras. Santa Marta hasta la fecha es una comunidad que sigue siendo un ejemplo para las demás comunidades en cuanto a organización y desarrollo comunitario.
+                    </p>
+                    <p style="text-align: justify;" data-aos="fade-up" data-aos-delay="800">
+                        La comunidad de Santa Marta es la cuna de grandes artesanos y emprendedores, muchas de las personas que forman parte de la comunidad, tuvieron en algún momento un gran pensamiento y visión de superación personal y comunitaria, esto ha sido uno de los principales motivos por los que, estas personas han hecho de un pensamiento una realidad tangible. Esta realidad la han llevado a cabo trabajando duro, superando obstáculos, aprendiendo de los errores y experiencias, aliándose con otras personas y sobre todo manteniendo esa convicción de hacer realidad sus sueños o de poder satisfacer sus necesidades hablando en términos económicos.
+                    </p>
+                    <p style="text-align: justify;" data-aos="fade-up" data-aos-delay="1000">
+                        En este sitio web usted podrá encontrar información sobre diferentes emprendimientos que hay dentro de la comunidad y fuera de esta, pero que, aunque algunos de estos emprendimientos están fuera de la comunidad, han sido personas habitantes de Santa Marta los que han tenido ese gran pensamiento, que hoy en día lo han vuelto una realidad. Este sitio ha sido creado con el fin de informar y dar a conocer los diferentes productos y servicios que se ofrecen en cada emprendimiento, todo esto con la intención de lograr que aquellas personas que no viven en Santa Marta conozcan los diferentes espacios a los cuales pueden acudir cuando visitan nuestra comunidad, en dependencia de cada una de sus necesidades.
+                    </p>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <img src="c:\Users\MINEDUCYT\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\9BC792898A1F66E2ED7C2E2407B3FE8C\Imagen de WhatsApp 2025-06-06 a las 21.25.29_40620330.jpg" class="img-fluid rounded history-img" alt="Equipo de EmprendeLocal">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Emprendimientos -->
+    <section id="Emprendimientos" class="py-5" style="background-color: palevioletred;">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">🦋 Emprendimientos Comunitarios 🦋</h2>
+            <div class="row g-4">
+                <!-- Emprendimiento 1 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 shadow-sm d-flex flex-column card-emprendimiento">
+                        <img src="img/Decoraciones.jpg" class="card-img-top" alt="Decoraciones">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-success">Leivas Decoraciones y Eventos</h5>
+                            <p style="text-align: justify;" class="card-text flex-grow-1">Realizamos decoraciones y arreglos florales para tus eventos especiales, nos caracterizamos por hacer nuestro trabajo con amor y responsabilidad para que disfrutes al máximo de tus festejos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emprendimiento 2 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 shadow-sm d-flex flex-column card-emprendimiento">
+                        <img src="img/Liceo Gym.jpg" class="card-img-top" alt="Liceo Gym">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-success">LICEO GYM</h5>
+                            <p style="text-align: justify;" class="card-text flex-grow-1">Liceo Gym es un espacio creado para ayudarte a mejorar tu salud física y bienestar emocional. Creemos en tu potencial y te ayudamos en el proceso hacia el cambio, el primer paso hacia algo mejor lo decides tú.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emprendimiento 3 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 shadow-sm d-flex flex-column card-emprendimiento">
+                        <img src="c:/Users/MINEDUCYT/Downloads/Spa.jpg" class="card-img-top" alt="Salud y Belleza Natural">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-success">Eco Spa</h5>
+                            <p style="text-align: justify;" class="card-text flex-grow-1">Eco Spa es un refugio de bienestar donde la salud, la belleza y la naturaleza se encuentran. Ofrecemos tratamientos ecológicos y productos naturales que cuidan tu cuerpo y respetan el planeta. Renueva tu energía de forma consciente y armoniosa.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emprendimiento 4 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card h-100 shadow-sm d-flex flex-column card-emprendimiento">
+                        <img src="img/Salomé.jpg" class="card-img-top" alt="Un menú exquisito">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-success">Salomé Restaurante & Café</h5>
+                            <p style="text-align: justify;" class="card-text flex-grow-1">
+                          Salomé Restaurante & Café es el lugar donde la buena comida y el ambiente acogedor se encuentran. Disfruta de platos llenos de sabor, café de calidad y momentos especiales en un espacio pensado para atenderte con una buena calidad a ti y a toda tu familia.<p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emprendimiento 5 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="card h-100 shadow-sm d-flex flex-column card-emprendimiento">
+                        <img src="c:/Users/MINEDUCYT/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/TempState/DC1AC4CEF27C6A26C8E60656341C209B/Imagen de WhatsApp 2025-06-10 a las 22.29.00_21c55270.jpg" class="card-img-top" alt="Uñas y Estética">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-success">Daniela Torres Belleza y Uñas</h5>
+                            <p class="card-text flex-grow-1">Ofrecemos servicios personalizados de manicura y pedicura, maquillajes y peinados en el cabello. Usamos diseños modernos y nos caracterizamos por brindamos una atención dedicada y responsable en cada uno de nuestros servicios.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emprendimiento 6 -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="card h-100 shadow-sm d-flex flex-column card-emprendimiento">
+                        <img src="img/Pizza.jpg" class="card-img-top" alt="Un menú exquisito">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-success">Santa Marta Pizza</h5>
+                            <p style="text-align: justify;" class="card-text flex-grow-1">En Santa Marta Pizza combinamos sabor, tradición y pasión por la buena comida. Disfruta de nuestras pizzas artesanales, hechas con ingredientes frescos y el auténtico toque que solo Santa Marta puede ofrecer. ¡Cada bocado es una experiencia!.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Exploremos -->
+    <section id="Exploremos" class="py-5" style="background-color: goldenrod;">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">🌟 Exploremos lo Nuestro 🌟</h2>
+            <div class="row g-4">
+                <!-- Card 1: Decoraciones -->
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
+                    <a href="Decoraciones.html" class="blog-card">
+                        <div class="card-img" style="background-image: url('img/Decoraciones 1.jpeg');">
+                            <div class="card-overlay">
+                                <h4>Decoraciones</h4>
+                                <p>Ideas creativas para ambientar tus espacios.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card 2: Liceo Gym -->
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+                    <a href="Liceo Gym.html" class="blog-card">
+                        <div class="card-img" style="background-image: url('img/Gym.1.jpg');">
+                            <div class="card-overlay">
+                                <h4>Liceo Gym</h4>
+                                <p>Fuerza, salud y bienestar físico.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card 3: Salud y Belleza -->
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="300">
+                    <a href="Salud y Belleza.html" class="blog-card">
+                        <div class="card-img" style="background-image: url('img/Rosalina.2.jpg');">
+                            <div class="card-overlay">
+                                <h4>Salud y Belleza</h4>
+                                <p>Relájate y luce bien desde adentro.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card 4: Restaurante -->
+                <div class="col-md-4" data-aos="flip-right" data-aos-delay="400">
+                    <a href="Restaurante.html" class="blog-card">
+                        <div class="card-img" style="background-image: url('img/Salomé.8.jpg');">
+                            <div class="card-overlay">
+                                <h4>Restaurante</h4>
+                                <p>Sabores únicos con el toque local.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card 5: Belleza y Uñas -->
+                <div class="col-md-4" data-aos="flip-right" data-aos-delay="500">
+                    <a href="Belleza y Uñas.html" class="blog-card">
+                        <div class="card-img" style="background-image: url('img/Dany.1.jpg');">
+                            <div class="card-overlay">
+                                <h4>Belleza y Uñas</h4>
+                                <p>Estilo y elegancia en cada detalle.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card 6: Pizzería Comunitaria -->
+                <div class="col-md-4" data-aos="flip-right" data-aos-delay="600">
+                    <a href="Pizzería Comunitaria.html" class="blog-card">
+                        <div class="card-img" style="background-image: url('img/Pizza.1.jpg');">
+                            <div class="card-overlay">
+                                <h4>Pizzería Comunitaria</h4>
+                                <p>Sabor que une a la comunidad.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- Sección donde se hace mención de otros emprendimientos -->
+<section id="Otros-Emprendimientos" class="py-5 position-relative overflow-hidden" style="background: linear-gradient(135deg, #deb887 0%, #d2b48c 50%, #cd853f 100%);">
+    <!-- Elementos decorativos de fondo -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1;">
+        <div class="position-absolute" style="top: 10%; left: 5%; width: 100px; height: 100px; background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
+        <div class="position-absolute" style="top: 60%; right: 10%; width: 80px; height: 80px; background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%); border-radius: 50%; animation: float 8s ease-in-out infinite reverse;"></div>
+        <div class="position-absolute" style="top: 30%; right: 30%; width: 60px; height: 60px; background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%); border-radius: 50%; animation: float 7s ease-in-out infinite;"></div>
+    </div>
+    
+    <div class="container position-relative">
+        <!-- Título de la sección -->
+        <div class="text-center mb-5" data-aos="fade-up">
+            <div class="d-inline-block p-3 rounded-circle mb-3" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
+                <i class="fas fa-store text-white display-4" style="animation: pulse 2s infinite;"></i>
+            </div>
+            <h2 class="display-4 fw-bold text-white mb-3" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                Otros Emprendimientos
+            </h2>
+            <p class="lead text-white" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+                Conoce más negocios locales que forman parte de nuestra comunidad
+            </p>
+            <div class="mx-auto" style="width: 100px; height: 3px; background: linear-gradient(45deg, #fff, rgba(255,255,255,0.5)); border-radius: 2px;"></div>
+        </div>
+
+        <!-- Grid de emprendimientos -->
+        <div class="row g-4">
+            <!-- Emprendimiento 1: Restaurantes Familiares -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="emprendimiento-card restaurante">
+                    <div class="card-image" style="background-image: url('img/Barbería.jpg');"></div>
+                    <div class="overlay"></div>
+                    <div class="card-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="card-content">
+                        <h5 class="card-title">Restaurantes Familiares</h5>
+                        <p class="card-description">
+                            Comida tradicional y especialidades locales que mantienen vivas las tradiciones culinarias de nuestra región.
+                        </p>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            Varios sectores de la comunidad
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emprendimiento 2: Tiendas de Ropa -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="emprendimiento-card ropa">
+                    <div class="card-image" style="background-image: url('img/Impacto.jpg');"></div>
+                    <div class="overlay"></div>
+                    <div class="card-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h5 class="card-title">Tiendas de Ropa</h5>
+                        <p class="card-description">
+                            Boutiques y tiendas que ofrecen moda accesible y tendencias actuales para toda la familia.
+                        </p>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            Centro comercial local
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emprendimiento 3: Agricultura Familiar -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="emprendimiento-card agricultura">
+                    <div class="card-image" style="background-image: url('img/agricultura.jpg');"></div>
+                    <div class="overlay"></div>
+                    <div class="card-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="card-content">
+                        <h5 class="card-title">Agricultura Familiar</h5>
+                        <p class="card-description">
+                            Productores que cultivan productos frescos y orgánicos, abasteciendo con alimentos saludables.
+                        </p>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            Áreas rurales cercanas
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emprendimiento 4: Servicios Técnicos -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="emprendimiento-card servicios">
+                    <div class="card-image" style="background-image: url('img/servicios-tecnicos.jpg');"></div>
+                    <div class="overlay"></div>
+                    <div class="card-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="card-content">
+                        <h5 class="card-title">Servicios Técnicos</h5>
+                        <p class="card-description">
+                            Talleres especializados que brindan soluciones rápidas y confiables para el hogar y negocios.
+                        </p>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            Talleres del sector
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emprendimiento 5: Artesanías Locales -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                <div class="emprendimiento-card artesanias">
+                    <div class="card-image" style="background-image: url('img/artesanias.jpg');"></div>
+                    <div class="overlay"></div>
+                    <div class="card-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="card-content">
+                        <h5 class="card-title">Artesanías Locales</h5>
+                        <p class="card-description">
+                            Artesanos que crean productos únicos, preservando técnicas ancestrales y arte funcional.
+                        </p>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            Mercados locales
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emprendimiento 6: Tiendas de Conveniencia -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                <div class="emprendimiento-card conveniencia">
+                    <div class="card-image" style="background-image: url('img/tienda-conveniencia.jpg');"></div>
+                    <div class="overlay"></div>
+                    <div class="card-icon">
+                        <i class="fas fa-shopping-basket"></i>
+                    </div>
+                    <div class="card-content">
+                        <h5 class="card-title">Tiendas de Conveniencia</h5>
+                        <p class="card-description">
+                            Comercios que ofrecen productos de primera necesidad, facilitando el acceso a artículos esenciales.
+                        </p>
+                        <div class="card-location">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            Puntos estratégicos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Mensaje Final -->
+<div class="text-center mt-5" data-aos="zoom-in-up" data-aos-delay="600">
+  <div class="p-5 rounded-4 shadow-lg mensaje-final" style="background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2);">
+    <h3 class="text-white mb-4 fw-bold" style="text-shadow: 2px 2px 6px rgba(0,0,0,0.4); animation: fadeInUp 2s ease-in-out;">
+      🌟 ¡Santa Marta es tierra de sueños y visión!
+    </h3>
+    <p class="text-white lead" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.3); animation: fadeInUp 3s ease-in-out;">
+      Nuestra comunidad está llena de <strong>personas emprendedoras</strong> con visión, esfuerzo y deseos de superación personal y familiar.  
+      Cada negocio refleja la pasión y el compromiso de quienes creen en un futuro mejor para todos.
+    </p>
+    <p class="text-white mt-4" style="animation: fadeInUp 4s ease-in-out;">
+      💡 Si conoces otro emprendimiento que forma parte de esta gran red, ¡compártelo con nosotros y sigamos creciendo juntos!
+    </p>
+  </div>
+</div>
+
+<!-- Animaciones Personalizadas -->
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 40px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .mensaje-final {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .mensaje-final:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  }
+</style>
+
+
+    <style>
+        .emprendimiento-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 300px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .emprendimiento-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .emprendimiento-card .card-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: all 0.4s ease;
+        }
+
+        .emprendimiento-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .emprendimiento-card .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+            transition: all 0.4s ease;
+        }
+
+        .emprendimiento-card:hover .overlay {
+            background: linear-gradient(45deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
+        }
+
+        .emprendimiento-card .card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            color: white;
+            transform: translateY(60px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+        }
+
+        .emprendimiento-card:hover .card-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .emprendimiento-card .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .emprendimiento-card .card-description {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+
+        .emprendimiento-card .card-location {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+
+        .emprendimiento-card .card-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            transition: all 0.3s ease;
+            transform: scale(0);
+        }
+
+        .emprendimiento-card:hover .card-icon {
+            transform: scale(1);
+        }
+
+        /* Efectos específicos por tipo de emprendimiento */
+        .emprendimiento-card.restaurante:hover .overlay {
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.8), rgba(238, 90, 36, 0.6));
+        }
+
+        .emprendimiento-card.ropa:hover .overlay {
+            background: linear-gradient(45deg, rgba(78, 205, 196, 0.8), rgba(68, 160, 141, 0.6));
+        }
+
+        .emprendimiento-card.agricultura:hover .overlay {
+            background: linear-gradient(45deg, rgba(168, 230, 207, 0.8), rgba(127, 205, 205, 0.6));
+        }
+
+        .emprendimiento-card.servicios:hover .overlay {
+            background: linear-gradient(45deg, rgba(255, 217, 61, 0.8), rgba(255, 154, 60, 0.6));
+        }
+
+        .emprendimiento-card.artesanias:hover .overlay {
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.6));
+        }
+
+        .emprendimiento-card.conveniencia:hover .overlay {
+            background: linear-gradient(45deg, rgba(255, 138, 128, 0.8), rgba(255, 87, 34, 0.6));
+        }
+    </style>
+</section>
+
+
+
+    <!-- Estilos CSS integrados -->
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2) !important;
+        }
+
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .display-4 {
+                font-size: 2rem;
+            }
+            
+            .card-body {
+                padding: 1.5rem !important;
+            }
+        }
+    </style>
+</section>
+
+
+
+
+<!-- Footer -->
+<footer class="py-5 text-white" style="background: linear-gradient(to right, #6a11cb, #2575fc);" data-aos="fade-up">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <!-- EmprendeLocal -->
+            <div class="col-md-6">
+                <h4 class="fw-bold">EmprendeLocal</h4>
+                <p class="mb-3">Conectamos emprendedores con su comunidad para impulsar juntos la economía local. ¡Sé parte del cambio!</p>
+                <p class="mb-0">&copy; 2025 EmprendeLocal | Proyecto Escolar</p>
+            </div>
+
+            <!-- Contacto -->
+            <div class="col-md-6 text-md-end">
+                <h5 class="fw-bold">¿Tienes un emprendimiento?</h5>
+                <p class="mb-2">O simplemente quieres sumarte al proyecto. ¡Contáctanos!</p>
+                <p class="mb-2"><i class="fab fa-whatsapp me-2"></i> <strong>+503 7494 4682</strong></p>
+                <a href="https://wa.me/50372353194" target="_blank" class="btn btn-light text-dark fw-semibold d-inline-flex align-items-center shadow" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <i class="fab fa-whatsapp me-2 fa-lg"></i> Enviar Mensaje
+                </a>
+                <p class="mt-3 mb-0">Hecho con <i class="fas fa-heart text-danger pulse"></i> para emprendedores</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Extra CSS -->
+<style>
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+</style>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <script>
+        // Inicializar AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Función para crear partículas
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Función para mostrar/ocultar botón de scroll
+        function toggleScrollButton() {
+            const scrollButton = document.querySelector('.scroll-indicator');
+            if (window.pageYOffset > 300) {
+                scrollButton.classList.add('show');
+            } else {
+                scrollButton.classList.remove('show');
+            }
+        }
+
+        // Función para scroll suave hacia arriba
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Animación de aparición para elementos en scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        // Efecto parallax para el hero
+        function parallaxEffect() {
+            const hero = document.querySelector('.hero-section');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            if (hero) {
+                hero.style.backgroundPositionY = rate + 'px';
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+
+        window.addEventListener('scroll', function() {
+            toggleScrollButton();
+            animateOnScroll();
+            parallaxEffect();
+        });
+
+        // Smooth scrolling para los enlaces del navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animación del navbar al hacer scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(33, 37, 41, 0.98)';
+                navbar.style.backdropFilter = 'blur(15px)';
+            } else {
+                navbar.style.background = 'rgba(33, 37, 41, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Animación de escritura para el efecto typing
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Inicializar efecto de escritura cuando el elemento sea visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.target.classList.contains('typing-effect')) {
+                    const text = entry.target.textContent;
+                    typeWriter(entry.target, text, 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.typing-effect').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

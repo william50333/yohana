@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eco Spa - Salud y Belleza Ecológica</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 50%, #e0f2e0 100%);
+      color: #2c3e2c;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animaciones de entrada */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200px 0; }
+      100% { background-position: 200px 0; }
+    }
+
+    /* Header con gradiente y animaciones */
+    header {
+      background: linear-gradient(135deg, #4a7c59 0%, #6a9c69 50%, #8bc34a 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease-in-out infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="leaves" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23leaves)"/></svg>');
+      opacity: 0.3;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .header-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      animation: fadeInUp 1s ease-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-container img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      animation: pulse 3s ease-in-out infinite;
+      transition: transform 0.3s ease;
+    }
+
+    .header-container img:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .header-container h1 {
+      font-size: 3.5em;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      font-weight: 700;
+      letter-spacing: 2px;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .header-container p {
+      font-size: 1.4em;
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    /* Navegación moderna */
+    nav {
+      background: linear-gradient(90deg, #8bc34a, #9ccc65, #aed581);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      padding: 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: fadeInUp 1s ease-out 0.9s both;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 20px 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Secciones con animaciones */
+    section {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    section.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section:nth-child(even) {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 255, 248, 0.9));
+    }
+
+    h2 {
+      color: #4a7c59;
+      margin-bottom: 30px;
+      font-size: 2.5em;
+      text-align: center;
+      position: relative;
+      font-weight: 700;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, #8bc34a, #4a7c59);
+      border-radius: 2px;
+      animation: shimmer 2s ease-in-out infinite;
+    }
+
+    /* Párrafos con animación */
+    p {
+      margin-bottom: 20px;
+      font-size: 1.1em;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: fadeInLeft 0.8s ease-out forwards;
+    }
+
+    p:nth-child(even) {
+      animation: fadeInRight 0.8s ease-out forwards;
+    }
+
+    /* Servicios mejorados */
+    #servicios {
+      background: linear-gradient(135deg, #f8fff8 0%, #e8f5e8 100%);
+    }
+
+    .servicio {
+      background: linear-gradient(135deg, white, #f9fff9);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      font-size: 1.1em;
+      color: #2c3e2c;
+      transition: all 0.4s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .servicio::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #8bc34a, #4a7c59, #6a9c69);
+      border-radius: 15px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .servicio:hover::before {
+      opacity: 1;
+    }
+
+    .servicio:hover {
+      transform: translateY(-8px) scale(1.02);
+      color: white;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    /* Galería mejorada */
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      padding: 20px 0;
+    }
+
+    .galeria img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      filter: brightness(0.9) saturate(1.1);
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      filter: brightness(1) saturate(1.3);
+    }
+
+    /* Contacto mejorado */
+    .contacto {
+      background: linear-gradient(135deg, #4a7c59, #6a9c69);
+      color: white;
+    }
+
+    .contacto h2 {
+      color: white;
+    }
+
+    .contacto h2::after {
+      background: linear-gradient(90deg, white, rgba(255,255,255,0.7));
+    }
+
+    .contacto p {
+      font-size: 1.2em;
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .contacto a {
+      color: #aed581;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .contacto a:hover {
+      color: white;
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+
+    /* Footer mejorado */
+    footer {
+      background: linear-gradient(135deg, #2c3e2c, #4a7c59);
+      color: white;
+      text-align: center;
+      padding: 30px;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    /* Botón del catálogo mejorado */
+    .catalogo-btn {
+      background: linear-gradient(135deg, #8bc34a, #6a9c69);
+      color: white;
+      padding: 18px 35px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(139, 195, 74, 0.3);
+    }
+
+    .catalogo-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .catalogo-btn:hover::before {
+      left: 100%;
+    }
+
+    .catalogo-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 35px rgba(139, 195, 74, 0.4);
+    }
+
+    /* Responsivo mejorado */
+    @media (min-width: 768px) {
+      .header-container {
+        flex-direction: row;
+        text-align: left;
+        gap: 40px;
+      }
+
+      .header-container img {
+        margin-right: 0;
+      }
+
+      .header-container div {
+        max-width: 600px;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      nav a {
+        padding: 20px 30px;
+      }
+    }
+
+    /* Efectos de scroll */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: linear-gradient(90deg, #8bc34a, #4a7c59);
+      z-index: 1000;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+<div class="scroll-indicator"></div>
+
+<header>
+  <div class="header-container">
+    <img src="c:\Users\MINEDUCYT\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\B084AAEFA0A2F7AB72363110BCDA458E\Imagen de WhatsApp 2025-06-10 a las 22.07.29_e3d1ef91.jpg" alt="Logo Eco Spa" />
+    
+    <div>
+      <h1>Eco Spa</h1>
+      <p>Salud y Belleza Ecológica</p>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="#historia">Historia</a>
+  <a href="#lema">Lema</a>
+  <a href="#servicios">Servicios</a>
+  <a href="#galeria">Galería</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+<section id="historia">
+  <h2>Nuestra Historia</h2>
+  <p style="text-align: justify;">Rosalina López es una mujer luchadora originaria de la comunidad Santa Marta, actualmente propietaria de Eco Spa "Salud y Belleza Ecológica".</p>
+  <p style="text-align: justify;">Rosalina desde pequeña soñaba con ser su propia jefa; ella siempre tuvo la idea de montar su propio negocio, y gracias a su esfuerzo y lucha constante ha logrado hacer realidad lo que en un pasado solo estaba en su mente.</p>
+  <p style="text-align: justify;">Con el pasar de los años, Rosalina se va interesando por la parte estética, cuidado de la piel y en general todo lo relacionado con la belleza exterior en mujeres y hombres.</p> 
+  <p style="text-align: justify;">Por necesidades económicas Rosalina se ve obligada a salir de la comunidad hacia la zona urbana en busca de mejores oportunidades laborales, luego de 18 años aproximadamente de estar fuera de la comunidad y de haberse expuesto a diferentes condiciones laborales, decide por fin atreverse a montar su propio emprendimiento en Sensuntepeque Cabañas y aunque su negocio está fuera de la comunidad, Rosalina siempre mantiene el espíritu de apoyar a la población de Santa Marta, a través de los diferentes servicios que en Eco Spa se ofrecen.</p>
+  <p style="text-align: justify;">Eco Spa nace con el fin de ofrecer bienestar físico y emocional a través de productos y tratamientos naturales, respetando el medio ambiente y promoviendo un estilo de vida saludable.</p>
+  <p style="text-align: justify;">Rosalina junto a dos compañeras más son las personas que laboran en Eco Spa, ellas se distribuyen el trabajo de manera que una se encarga de la parte técnica y todo lo que tiene que ver con las redes sociales, otra compañera realiza toda la parte que tiene que ver con el salón, manicure, pedicure y tratamientos para el cabello, mientras que Rosalina es la encargada de realizar todo lo relacionado con la piel como lo son, tratamientos faciales, masajes, depilaciones con cera y exfoliaciones corporales.</p>
+  <p style="text-align: justify;">Lina como le decimos de cariño, es una mujer que inspira lucha y superación personal para aquellas personas que la conocen, hoy en día está haciendo realidad lo que en el pasado solamente existía en su mente, ella es un ejemplo a seguir para muchas jóvenes de la comunidad Santa Marta, pues es una mujer que irradia de amor, paciencia, tranquilidad, valentía y que a su vez se encarga de transmitir buenos valores mediante sus acciones.</p>
+</section>
+
+<section id="lema">
+  <h2>¿Qué nos caracteriza?</h2>
+  <p style="text-align: justify;">Somos un SPA dedicado al cuidado de la Salud y la belleza personal. Eco Spa nace como respuesta a la necesidad de consumir productos y servicios amigables con el medio ambiente por lo que nuestros servicios utilizan técnicas y productos naturales y veganos. El lema que maneja el equipo que labora en Eco Spa es "Salud y Belleza Ecológica", pues tratan de que el 95% de sus productos sean naturales. Adicionalmente, contamos con un personal altamente comprometido con valores de servicio, calidad, honestidad, respeto y trabajo en equipo; quienes además están siempre en educación continua para garantizar la satisfacción de todos nuestros clientes.</p> 
+  <p style="text-align: justify;">En Eco Spa se busca la solución de problemas de estrés que sufren las personas, cada servicio se realiza con mucha responsabilidad, una atención especial para cada cliente y con todas las intención de ayudar a las personas y hacer de su estancia en Eco Spa una experiencia única que les ayude en su salud física y emocional.</p>
+</section>
+
+<section id="servicios">
+  <h2>Nuestros Servicios</h2>
+
+  <p style="max-width: 800px; margin: 0 auto 20px; text-align: center; font-size: 1.1em;">
+    Para que conozcas mejor en qué consiste cada uno de nuestros servicios te dejamos el siguiente catálogo especial donde podrás encontrar una explicación detallada de cada uno de nuestros servicios, el costo, beneficios y las recomendaciones de cada tratamiento para que elijas el ideal para ti.
+  </p>
+
+  <div style="text-align: center; margin-bottom: 40px;">
+    <a href="https://drive.google.com/file/d/1aP6_ugHdC9Zx_r-d_bQUjfSkaMwbN8_k/view?fbclid=PAQ0xDSwLBVmZleHRuA2FlbQIxMQABp7aEUvRTPhMs8Nbqlhd_f5GB79T6y2DhDGWwgyg9atu7KW7NfIK7vKbBKXBG_aem_swT54Hs80KosLMHez3ClOg" target="_blank" class="catalogo-btn">
+      📖 Ver Catálogo de Servicios
+    </a>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;">
+    <div class="servicio">💆 Masaje con terapia de piedras calientes</div>
+    <div class="servicio">🌿 Masajes relajantes</div>
+    <div class="servicio">💧 Limpiezas faciales</div>
+    <div class="servicio">💅 Manicura Spa y Pedicura Spa</div>
+    <div class="servicio">💎 Esmaltado gel permanente</div>
+    <div class="servicio">✨ Laminado de cejas</div>
+    <div class="servicio">🎨 Coloración de cejas con henna</div>
+    <div class="servicio">👁️‍🗨️ Lifting de pestañas</div>
+    <div class="servicio">🧖‍♀️ Exfoliación Corporal</div>
+    <div class="servicio">🌙 Baño de luna</div>
+    <div class="servicio">🕊️ Blanqueamiento corporal</div>
+    <div class="servicio">🌱 Tratamiento capilar de células madres</div>
+    <div class="servicio">💖 Uñas acrílicas</div>
+  </div>
+</section>
+
+<section id="galeria">
+  <h2>Galería de Servicios</h2>
+  <div class="galeria">
+    <img src="c:\Users\MINEDUCYT\Downloads\a8ca2d24-ede9-4caf-b9f0-092417c5a169.jpeg" alt="Masaje">
+    <img src="c:\Users\MINEDUCYT\Downloads\7f4d2c3c-b744-48c4-b196-e5f788a06f60.jpeg" alt="Facial">
+    <img src="c:\Users\MINEDUCYT\Downloads\7a0e4114-52a2-4c82-b4f5-98139061d2b3.jpeg" alt="Capilar">
+    <img src="c:\Users\MINEDUCYT\Downloads\c5c23ce9-25f5-4c16-820d-a2e189282499.jpeg" alt="Manicura">
+    <img src="c:\Users\MINEDUCYT\Downloads\f46b7d92-3d77-4ff9-b3db-c47d9e7d4bf3.jpeg" alt="Productos">
+    <img src="c:\Users\MINEDUCYT\Downloads\a8545296-0dc9-4e4c-8182-73546efc933e.jpeg" alt="Productos">
+  </div>
+</section>
+
+<!-- Sección de Contacto con estilo visual atractivo -->
+<section id="contacto" class="contacto py-5" style="background: linear-gradient(to right, Yellow, green);">
+  <div class="container text-center">
+    <div class="contact-card animate-on-scroll" style="
+      background: palevioletred (255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px yellow (0, 0, 0, 0.2);
+      max-width: 600px;
+      margin: auto;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    " onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 12px 36px rgba(0, 0, 0, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 32px rgba(0, 0, 0, 0.2)'">
+      
+      <h2 style="font-weight: bold; color: #4a7c59; margin-bottom: 1.5rem;">📬 Cómo contactarnos</h2>
+      
+      <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+        📍 <strong>Dirección:</strong><br>
+        <a style="color: purple;">Avenida norte #22A, salida a Ciudad Victoria Sensuntepeque</a>
+      </p>
+
+      <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+        📞 <strong>WhatsApp:</strong><br>
+        <a href="tel:+50372353194" style="color: purple; text-decoration: none;">+503 7235 3194</a>
+      </p>
+
+      <p style="font-size: 1.1rem;">
+        📱 <strong>Facebook</strong><br>
+        <a href="https://www.facebook.com/share/16kmTcvSB1/?mibextid=wwXIfr" target="_blank" style="color: purple; text-decoration: none;">Eco Spa</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <p>© 2025 Eco Spa.</p> 
+  <p>Salud y Belleza Ecológica.</p>
+</footer>
+
+<script>
+// Animaciones de scroll
+window.addEventListener('scroll', () => {
+  // Indicador de progreso
+  const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  document.querySelector('.scroll-indicator').style.width = scrolled + '%';
+  
+  // Animación de secciones
+  const sections = document.querySelectorAll('section');
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    const windowHeight = window.innerHeight;
+    const scrollY = window.pageYOffset;
+    
+    if (scrollY > (sectionTop - windowHeight + sectionHeight/3)) {
+      section.classList.add('animate');
+    }
+  });
+});
+
+// Animación inicial de párrafos
+window.addEventListener('load', () => {
+  const paragraphs = document.querySelectorAll('p');
+  paragraphs.forEach((p, index) => {
+    p.style.animationDelay = (index * 0.1) + 's';
+  });
+});
+
+// Smooth scroll para navegación
+document.querySelectorAll('nav a').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Efecto parallax sutil en el header
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const header = document.querySelector('header');
+  header.style.transform = `translateY(${scrolled * 0.5}px)`;
+});
+</script>
+
+</body>
+</html>
+
